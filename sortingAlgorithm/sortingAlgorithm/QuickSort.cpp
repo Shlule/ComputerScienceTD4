@@ -1,10 +1,10 @@
 #include "QuickSort.h"
 using namespace std;
 
-void QuickSort::swap(int* a, int* b) {
-	int t = *a;
-	*a = *b;
-	*b = t;
+void QuickSort::swap(float& a, float& b) {
+	float t = a;
+	a = b;
+	b = t;
 }
 
 int QuickSort::Partition(vector<float>& vectorP, int start, int end) {
@@ -19,9 +19,15 @@ int QuickSort::Partition(vector<float>& vectorP, int start, int end) {
 		//si je trouve un element plus grand que la valeur de mon pivot
 		if (vectorP[i] > pivotValue) {
 
-			float tampon = vectorP[i];
-			vectorP.erase(vectorP.begin()+i);
-			vectorP.emplace(vectorP.begin()+pivotIndex, tampon);
+			//j'echange la place de mon pivot avec ma valeur tester
+			swap(vectorP[i], vectorP[pivotIndex]);
+			// je reEcahnger avec l'avant derniere valeur  pour faire en sorte 
+			//que mon pivot a avancer de 1 place 
+			//je me retrouve donc avec le pivot qui a avancer de 1 place,
+			// ma valeur tester plus grande qui se trouve derrire mon pivot.
+			swap(vectorP[i], vectorP[pivotIndex-1]);
+			// je decremente de i de 1 pour que je teste mon pivot avec la nouvelle valeur de l'index deja tester
+			i--;
 			pivotIndex--;
 
 		}

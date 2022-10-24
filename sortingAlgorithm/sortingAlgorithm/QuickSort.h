@@ -6,7 +6,7 @@ public:
 	QuickSort(){}
 	~QuickSort() {}
 
-	void swap(int* a, int* b);
+	void swap(float& a, float& b);
 
 	int Partition(std::vector<float>& vectorP, int start, int end);
 	void execute(std::vector<float>& vectorP, int start, int end);
