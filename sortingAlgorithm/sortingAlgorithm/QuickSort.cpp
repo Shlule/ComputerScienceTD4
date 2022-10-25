@@ -15,7 +15,7 @@ int QuickSort::Partition(vector<float>& vectorP, int start, int end) {
 	int pivotValue = vectorP[pivotIndex];
 
 	// je parcour mon tableau
-	for (int i = start; i <= pivotIndex; i++) {
+	for (size_t i = start; i <= pivotIndex; i++) {
 		//si je trouve un element plus grand que la valeur de mon pivot
 		if (vectorP[i] > pivotValue) {
 
