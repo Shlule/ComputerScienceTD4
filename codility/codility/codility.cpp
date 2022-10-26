@@ -48,11 +48,30 @@ std::vector<int> CyclicRotation(std::vector<int>& vectorP, int k) {
     return vectorP;
 }
 
+bool IsSorted(std::vector<int> vectorP) {
+    if (vectorP.size() != 0) {
+        int cpt{ 0 };
+        for (auto i = vectorP.begin(); i != (vectorP.end()-1); i++) {
+
+            if (*i > *(vectorP.begin()+cpt + 1)) {
+                return false;
+
+            }
+            cpt++;
+        }
+        return true;
+    }
+    
+}
+
 int oddOccurencesInArray(std::vector<int> vectorP) {
-    std::map<int, int> multicount{};
-    for (auto i = vectorP.begin(); i != vectorP.end(); i++) {
+    // testing if list is already sorted
+    if (!IsSorted(vectorP)) {
+
 
     }
+
+    
 
 }
 
@@ -60,11 +79,13 @@ int oddOccurencesInArray(std::vector<int> vectorP) {
 int main()
 {
     std::vector<int> v{ 3,8,9,7,6 };
+    std::vector<int> w{ 1,2,3,5,9,10 };
 
-    CyclicRotation(v, 3);
+    std::cout << IsSorted(w);
+    /*CyclicRotation(v, 3);
     for (auto i = v.begin(); i != v.end() ; i++) {
         std::cout << *i;
-    }
+    }*/
 
     
 }
