@@ -5,6 +5,11 @@
 #include<bitset>
 #include<vector>
 #include<map>
+#include<algorithm>
+#include"QuickSort.h"
+
+QuickSort quicksort;
+
 int BitGap(int N) {
     std::string binary = std::bitset<32>(N).to_string();
     std::cout << binary<<'\n';
@@ -48,6 +53,7 @@ std::vector<int> CyclicRotation(std::vector<int>& vectorP, int k) {
     return vectorP;
 }
 
+
 bool IsSorted(std::vector<int> vectorP) {
     if (vectorP.size() != 0) {
         int cpt{ 0 };
@@ -67,21 +73,68 @@ bool IsSorted(std::vector<int> vectorP) {
 int oddOccurencesInArray(std::vector<int> vectorP) {
     // testing if list is already sorted
     if (!IsSorted(vectorP)) {
+    
+        std::sort(vectorP.begin(), vectorP.end());
 
+    }   
 
+    for (auto i = vectorP.begin(); i != (vectorP.end()-1); i+=2) {
+
+        if (*i != *(i + 1)) {
+           return *i;
+        }
     }
+
+    
 
     
 
 }
 
+int FrogJump(int x, int y, int d) {
+    if (x < y) {
+
+        int distance = y - x;
+        if (distance == 0) {
+            return 0;
+        }
+        if (distance % d==0) {
+            return distance / d;
+        }
+        else {
+            return distance / d + 1;
+        }
+
+        
+    }
+    return 0;
+}
+
+int PermMissingElem(std::vector<int> vectorP) {
+    if (vectorP.empty()) {
+        return 1;
+    }
+    if (vectorP.size() == 1 && *(vectorP.end() - 1) != 1) {
+        return 1;
+    }
+    std::sort(vectorP.begin(), vectorP.end());
+    int cpt{ 1 };
+
+    for (auto i = vectorP.begin(); i != vectorP.end(); i++) {
+        if (*i != cpt) {
+            return cpt;
+        }
+        cpt++;
+    }
+}
 
 int main()
 {
-    std::vector<int> v{ 3,8,9,7,6 };
+    std::vector<int> v{ 2,3,1,5,4,6,8,9};
     std::vector<int> w{ 1,2,3,5,9,10 };
+    std::vector<int> x{ 9,3,9,3,9,7,9 };
 
-    std::cout << IsSorted(w);
+    std::cout << PermMissingElem(v);
     /*CyclicRotation(v, 3);
     for (auto i = v.begin(); i != v.end() ; i++) {
         std::cout << *i;
