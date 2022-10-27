@@ -55,31 +55,14 @@ std::vector<int> CyclicRotation(std::vector<int>& vectorP, int k) {
 }
 
 
-bool IsSorted(std::vector<int> vectorP) {
-    if (vectorP.size() != 0) {
-        int cpt{ 0 };
-        for (auto i = vectorP.begin(); i != (vectorP.end()-1); i++) {
-
-            if (*i > *(vectorP.begin()+cpt + 1)) {
-                return false;
-
-            }
-            cpt++;
-        }
-        return true;
-    }
-    
-}
-
 int oddOccurencesInArray(std::vector<int> vectorP) {
-    // testing if list is already sorted
-    if (!IsSorted(vectorP)) {
-    
-        std::sort(vectorP.begin(), vectorP.end());
+    //sorted my list
+    std::sort(vectorP.begin(), vectorP.end());
 
-    }   
-
-    for (auto i = vectorP.begin(); i != (vectorP.end()-1); i+=2) {
+     
+    //check my value 2 by 2 if they're equal 
+    //if no i return the fisrt checked
+    for (auto i = vectorP.begin(); i != vectorP.end(); i+=2) {
 
         if (*i != *(i + 1)) {
            return *i;
@@ -112,14 +95,21 @@ int FrogJump(int x, int y, int d) {
 }
 
 int PermMissingElem(std::vector<int> vectorP) {
+    // je verifie si la list est vide
     if (vectorP.empty()) {
         return 1;
     }
+    //je verifie si la 
     if (vectorP.size() == 1 && *(vectorP.end() - 1) != 1) {
         return 1;
     }
+    // je sort ma list
     std::sort(vectorP.begin(), vectorP.end());
+
     int cpt{ 1 };
+    //je parcoure ma liste tout en verifiant que mon compteur soit egal a ma valeur
+    //si ce n'est pas le cas je return la valeur de mon compteur
+    //sinon j'incremente mon compteur
 
     for (auto i = vectorP.begin(); i != vectorP.end(); i++) {
         if (*i != cpt) {
@@ -138,6 +128,10 @@ int TapeEquilibrum(std::vector<int> vectorP) {
         leftList += *(vectorP.begin() + index);
         rightList -= *(vectorP.begin() + index);
         int dif{ abs(leftList-rightList)};
+
+        if (vectorP.size() == 2) {
+            return dif;
+        }
 
         while (dif < prevDif) {
             index++;
