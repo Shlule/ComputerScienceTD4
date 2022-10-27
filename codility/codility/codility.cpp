@@ -7,6 +7,7 @@
 #include<map>
 #include<algorithm>
 #include"QuickSort.h"
+#include<numeric>
 
 QuickSort quicksort;
 
@@ -128,15 +129,38 @@ int PermMissingElem(std::vector<int> vectorP) {
     }
 }
 
+int TapeEquilibrum(std::vector<int> vectorP) {
+    if (!vectorP.empty()) {
+        int leftList{ 0 };
+        int rightList{ std::accumulate(vectorP.begin(), vectorP.end(), 0) };
+        int prevDif{ abs(leftList - rightList) };
+        int index{ 0 };
+        leftList += *(vectorP.begin() + index);
+        rightList -= *(vectorP.begin() + index);
+        int dif{ abs(leftList-rightList)};
+
+        while (dif < prevDif) {
+            index++;
+            prevDif = dif;
+            leftList += *(vectorP.begin() + index);
+            rightList -= *(vectorP.begin() + index);
+            dif= abs(leftList - rightList);
+
+           
+        }
+        return prevDif;
+        
+    }
+}
+
 int main()
 {
     std::vector<int> v{ 2,3,1,5,4,6,8,9};
     std::vector<int> w{ 1,2,3,5,9,10 };
     std::vector<int> x{ 9,3,9,3,9,7,9 };
-
-    std::cout << PermMissingElem(v);
-    /*CyclicRotation(v, 3);
-    for (auto i = v.begin(); i != v.end() ; i++) {
+    
+    std::cout<<TapeEquilibrum(v);
+    /*for (auto i = v.begin(); i != v.end(); i++) {
         std::cout << *i;
     }*/
 
